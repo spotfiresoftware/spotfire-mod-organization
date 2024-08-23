@@ -1,0 +1,22 @@
+{
+    "name": "mod-starter",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "server": "mods-dev-server dist",
+        "build": "webpack --mode production",
+        "build-watch": "webpack --watch",
+        "start": "npm-run-all -p -r build-watch server"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4",
+        "copy-webpack-plugin": "^12.0.2",
+        "npm-run-all": "^4.1.5",
+        "@tibco/spotfire-mods-dev-server": "^1.0.1"
+    },
+    "dependencies": {}
+}

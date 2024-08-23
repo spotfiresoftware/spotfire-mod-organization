@@ -1,0 +1,416 @@
+/*
+ * Copyright © 2024. Cloud Software Group, Inc.
+ * This file is subject to the license terms contained
+ * in the license file that is distributed with this file.
+ */
+
+/* MAIN CONTENT */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height:100%;
+    overflow:hidden; /* all these overflow:hidden is to force scrollbars on individual canvas divs */
+}
+body {
+    margin:0px;
+    height:100%;
+    overflow:hidden;
+}
+
+div.main {
+    height:100%;
+    overflow:hidden;
+    display:flex;
+    flex-direction: row;
+    user-select:none;
+}
+
+/* Control elements with pointer events
+/* Purpose is to make UI more responsive due to events being consumed unintentionally */
+div.main div,input,textarea,button,select,option,svg,g,rect,line,polyline,text,path {
+    pointer-events: none;
+}
+
+div.main .interactive {
+    pointer-events: auto;
+}
+
+.clr-picker {
+    pointer-events: auto;
+}
+
+.clr-picker * {
+    pointer-events: auto;
+}
+
+
+/* CONTENT ELEMENT */
+div.main > div.content {
+    height:100%;
+    width:100%;
+    overflow:hidden;
+    display:flex;
+    flex-direction: row;
+    user-select:none;
+}
+
+/* CONTENT INNTER ELEMENT */
+/* This may be inside zoom handler if present */
+div.content div.content-inner {
+    overflow:hidden;
+    flex-grow: 1;
+    display:flex;
+    flex-direction: column;
+}
+
+/* CONFIGURATION ICON */
+div.main > div.configuration-icon-group {
+    display:block;
+}
+
+div.main > div.configuration-icon-group > div.configuration-icon {
+    margin-left:2px;
+    height:20px;
+}
+
+div.main > div.configuration-icon-group > div.configuration-icon > svg {
+    height:16px;
+    width:16px;    
+}
+
+div.main > div.configuration-icon-group > div.configuration-icon:hover {
+    cursor: pointer;
+}
+
+div.main > div.configuration-icon-group > div.configuration-icon > svg > g > path.gear-icon {
+    fill: rgb(97, 100, 107);
+    pointer-events: none;
+}
+
+div.main > div.configuration-icon-group > div.configuration-icon > svg > g > path.track-icon {
+    stroke: rgb(97, 100, 107);
+    pointer-events: none;
+}
+
+div.main > div.configuration-icon-group > div.configuration-icon:hover > svg {
+    cursor: pointer;
+}
+
+div.main > div.configuration-icon-group > div.configuration-icon:hover > svg > g > path.gear-icon {
+    fill: rgb(47, 50, 57);
+}
+
+div.main > div.configuration-icon-group > div.configuration-icon:hover > svg > g > path.track-icon {
+    stroke: rgb(47, 50, 57);
+}
+
+
+/* CONFIGURATION */
+div.main > div.configuration {
+    display: none;
+    flex-direction: column;
+
+    height:100%;
+    width:100%;
+    padding:5px;
+    background-color:#EEEEEE;
+}
+
+div.main.dark > div.configuration {
+    color: #61646B;
+}
+
+div.main > div.configuration > div.title {
+    font-size:20px;
+    font-weight:bold;
+}
+
+div.main > div.configuration > div.validation {
+    height:25px;
+    padding:5px;
+    color:white;
+}
+
+div.main > div.configuration.valid > div.validation {
+    background-color:darkgreen;
+}
+
+div.main > div.configuration.invalid > div.validation {
+    background-color:tomato;
+}
+
+div.main > div.configuration > div.details {
+    flex-grow: 1;
+    padding-top:5px;
+}
+
+div.main > div.configuration > div.details > textarea{
+    height:100%;
+    width:100%;
+}
+
+div.main > div.configuration > div.button {
+    margin-top:20px;
+    padding-top:10px;
+    user-select: none;
+    border-top:1px solid #CCCCCC;
+}
+
+div.main > div.configuration > div.button > button{
+    padding-right:10px;
+}
+
+div.main > div.configuration > div.form {
+    flex-grow: 1;
+    display:flex;
+    flex-direction: column;
+    user-select: none;
+    overflow-y: auto;
+}
+
+
+div.main > div.configuration > div.form div.group-label {
+    font-weight: bold;
+    font-size:14px;
+    margin-top:15px;
+    margin-bottom:5px;
+    padding-bottom:5px;
+    border-bottom:1px solid #CCCCCC;
+}
+
+div.main > div.configuration > div.form div.form-element {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom:15px;
+}
+
+div.main > div.configuration > div.form div.form-element div.label {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+div.main > div.configuration > div.form div.form-element {
+    display:flex;
+    flex-direction: row;
+}
+
+div.main > div.configuration > div.form div.form-element:is(.input, .select, .textarea) > div.input-container > div.label {
+    margin-bottom:5px;
+}
+
+div.main > div.configuration > div.form div.form-element.input > div.input-container > div.radio-group{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div.main > div.configuration > div.form div.form-element.input > div.input-container > div.radio-group > input {
+    flex-basis: 0;
+}
+
+div.main > div.configuration > div.form div.form-element.input > div.input-container > div.radio-group > div.label {
+    flex-basis: 0;
+    margin-right:5px;
+    margin-top:3px;
+}
+
+div.main > div.configuration > div.form div.form-element.checkbox > input {
+    flex: 0 0 auto;
+}
+
+div.main > div.configuration > div.form div.form-element.checkbox > div.label {
+    flex: 1 1 auto;
+    align-items: center;
+
+}
+
+div.main > div.configuration > div.form div.form-element.color.full input {
+    cursor: pointer;
+}
+
+div.main > div.configuration > div.form div.form-element.color.full .clr-field button {
+    width: 100%;
+    height: 100%;
+}
+
+div.main > div.configuration > div.form div.form-element.color.full.small input {
+    width:25px !important;
+}
+
+div.main > div.configuration > div.form div.form-element.color.full.small div.clr-field {
+    width:25px;
+}
+
+div.main > div.configuration > div.form div.form-element.textarea textarea {
+    font-size:10px;
+    width: 400px;
+    height: 150px;
+}
+
+
+
+/* VISUALIZATION */
+div.content div.visualization {
+    position:relative;
+    height:100%;
+    overflow:hidden;
+    flex-grow: 1;
+    display:flex;
+    flex-direction: column;
+}
+
+
+/* TRELLIS */
+div.content div.visualization div.trellis-collection {
+    display:flex;    
+    flex: 1 1 auto;
+    overflow:hidden;
+}
+
+div.content div.visualization div.trellis-collection.rows {
+    flex-direction:column;
+}
+
+div.content div.visualization div.trellis-collection.columns {
+    flex-direction:row;
+}
+
+div.content div.visualization div.trellis-collection > div.trellis-panel {
+    flex: 1;
+    display:flex;    
+    overflow:hidden;
+}
+
+div.content div.visualization div.trellis-collection.rows > div.trellis-panel {
+    flex-direction:row;
+}
+
+div.content div.visualization div.trellis-collection.columns > div.trellis-panel {
+    flex-direction:column;
+}
+
+div.content div.visualization div.trellis-collection.trellised.rows > div.trellis-panel {
+    border-top:1px solid #DFE0E2;
+    border-left:1px solid #DFE0E2;
+    border-right:1px solid #DFE0E2;
+}
+
+div.content div.visualization div.trellis-collection.trellised.rows > div.trellis-panel:last-child {
+    border-bottom:1px solid #DFE0E2;
+}
+
+div.main.dark div.content > div.visualization > div.trellis-collection.trellised.rows > div.trellis-panel {
+    border-top:1px solid #404040;
+    border-left:1px solid #404040;
+    border-right:1px solid #404040;
+}
+
+div.main.dark div.content > div.visualization > div.trellis-collection.trellised.rows > div.trellis-panel:last-child {
+    border-bottom:1px solid #404040;
+}
+
+div.content div.visualization div.trellis-collection.trellised.columns > div.trellis-panel {
+    border-top:1px solid #DFE0E2;
+    border-left:1px solid #DFE0E2;
+    border-bottom:1px solid #DFE0E2;
+}
+
+div.content div.visualization div.trellis-collection.trellised.columns > div.trellis-panel:last-child {
+    border-right:1px solid #DFE0E2;
+}
+
+div.main.dark div.content > div.visualization > div.trellis-collection.trellised.columns > div.trellis-panel {
+    border-top:1px solid #404040;
+    border-left:1px solid #404040;
+    border-bottom:1px solid #404040;
+}
+
+div.main.dark div.content div.visualization > div.trellis-collection.trellised.columns > div.trellis-panel:last-child {
+    border-right:1px solid #404040;
+}
+
+div.content div.visualization div.trellis-collection > div.trellis-panel > div.title{
+    background-color: #F8F8F8;
+    text-align: center;
+    user-select: none;           /* Non-prefixed version, currently */
+}
+
+div.main.dark div.content div.visualization > div.trellis-collection > div.trellis-panel > div.title {
+    background-color: #373737;
+}
+
+/* Columns - titles*/
+div.content div.visualization div.trellis-collection.trellised.columns > div.trellis-panel > div.title{
+    padding:1px 0px 1px 0px;
+    border-bottom:1px solid #DFE0E2;
+}
+
+div.main.dark div.content div.visualization > div.trellis-collection.trellised.columns > div.trellis-panel > div.title{
+    border-bottom:1px solid #404040;
+}
+
+/* Rows - titles*/
+div.content div.visualization div.trellis-collection.trellised.rows > div.trellis-panel > div.title{
+    padding:0px 1px 0px 1px;
+    border-left:1px solid #DFE0E2;
+}
+
+div.main.dark div.content div.visualization > div.trellis-collection.trellised.rows > div.trellis-panel > div.title{
+    padding:0px 1px 0px 1px;
+    border-left:1px solid #404040;
+}
+
+
+div.content div.visualization div.trellis-collection.rows > div.trellis-panel > div.title{
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+}
+
+
+/* CANVAS */
+/* No hierarchy here because the canvas can be included in a trellis panel, or just at the top level viz */
+div.content div.visualization div.canvas{
+    flex: 1;
+    display:flex;
+    flex-direction: row;
+    overflow:auto;
+}
+
+/* ERRORS */
+div.content div.error-detail {
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+}
+
+/* RECTANGULAR MARKING */
+.selection {
+    z-index: 10;
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute;
+    border: 1px solid #677085;
+    background-color: rgba(0, 90, 230, 0.17);
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+}
+
+.selection-bg {
+    visibility: hidden;
+    position: absolute;
+    background-color: rgba(200, 90, 230, 0);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+

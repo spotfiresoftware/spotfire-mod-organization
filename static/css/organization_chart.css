@@ -1,0 +1,169 @@
+/*
+ * Copyright © 2024. Cloud Software Group, Inc.
+ * This file is subject to the license terms contained
+ * in the license file that is distributed with this file.
+ */
+ 
+/* ORGANIZATION CHART */
+div.visualization div.canvas > div.organization-chart {
+	flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+	/*background-color:lightyellow;
+	border:1px solid goldenrod;*/
+    overflow:hidden;
+}
+
+/* Plot area */
+div.visualization div.canvas > div.organization-chart > div.plot-area {
+    position:relative;
+	flex: 1 1 auto;
+    display: block;
+    overflow: auto;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram {
+    height:100%;
+    width:100%;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram.vertical {
+    text-align:center;
+}
+
+/* SVG */
+/* Node content */
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content {
+    /*z-index: 1000;*/
+    height:100%;
+    width:100%;
+    display:block;
+    /*padding:2px; */
+    /*border: 1px solid #CCCCCC; */
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content.darkcolor {
+    color: white;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area.markable > div.diagram svg div.node-content {
+    cursor: pointer;
+}
+
+/* Node content */
+
+/* Borders */
+div.visualization div.canvas > div.organization-chart > div.plot-area.markable > div.diagram svg div.node-content div.border{
+    border: 1px solid #CCCCCC;
+    padding: 5px;
+}
+
+/* Images */
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.flex-row img {
+    padding-right:5%;
+    height:100%;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.flex-col img {
+    padding-bottom:5%;
+    width:100%;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content img.circle{
+    border-radius:50%;
+}
+
+
+/* Layout */
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.flex-col {
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.flex-row {
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction: row;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.flex-col > .fill {
+    flex:1;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.flex-row > .fill {
+    flex:1;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.start-center {
+    justify-content: start;
+    align-items: center;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.center-center {
+    justify-content: center;
+    align-items: center;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.end-center {
+    justify-content: end;
+    align-items: center;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.start-start {
+    justify-content: start;
+    align-items: start;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.center-start {
+    justify-content: center;
+    align-items: start;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.end-start {
+    justify-content: end;
+    align-items: start;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.start-end {
+    justify-content: start;
+    align-items: end;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.center-end {
+    justify-content: center;
+    align-items: end;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg div.node-content div.end-end {
+    justify-content: end;
+    align-items: end;
+}
+
+
+
+/* Child toggle */
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg g.child-action {
+    pointer-events: bounding-box;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg g.child-action path {
+    fill: #666666;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg g.child-action:hover {
+    cursor:pointer;
+}
+
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg g.child-action:hover path {
+    fill: #333333;
+}
+
+/* Link */
+div.visualization div.canvas > div.organization-chart > div.plot-area > div.diagram svg polyline.link {
+    stroke-width: 1px;
+    stroke: #666666;
+    fill: none;
+}
