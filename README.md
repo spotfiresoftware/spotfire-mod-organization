@@ -268,5 +268,10 @@ In a new terminal window:
 - [Mods by Spotfire®](https://github.com/spotfiresoftware/spotfire-mods/releases/latest): A public repository for example projects
 
 
-© Copyright 2024. Cloud Software Group, Inc.
+## License
+
+This project is licensed under the BSD license. The text can be found in the LICENSE file.
+
+Copyright © 2024. Cloud Software Group, Inc. All Rights Reserved.
+
 
